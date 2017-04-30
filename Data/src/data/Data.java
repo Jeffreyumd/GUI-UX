@@ -10,6 +10,8 @@ import java.sql.*;
  * @author Jeffrey A
  */
 public class Data {
+    
+  
 
                 
       private static Connection myConn;
@@ -28,6 +30,8 @@ public class Data {
 		System.out.println("DB connection successful to:" + url);
                 
                 getAllcity();
+                //T a = new T();
+                //a.setVisible(true);
     }
     
     	public static void getAllcity() throws Exception {
@@ -45,7 +49,7 @@ public class Data {
 			
 			while(rows.next())
 			{	
-			 System.out.println(rows.getString("Name"));
+			 System.out.println(rows.getString("Name") + rows.getString("ID"));
 			}
 			
 			//return list;
