@@ -1,5 +1,6 @@
 
 import java.awt.Color;
+import javax.swing.JOptionPane;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -19,10 +20,13 @@ public class GUI extends javax.swing.JFrame {
     public GUI() {
         initComponents();
         setSize(500,500);
+        reset();
     }
     
     private String turn = "X";
     private int count = 0;
+    private int winx = 0;
+    private int wino = 0;
     private String turnArray[][] = new String[3][3];
     
     public void nextTurn(){
@@ -31,14 +35,135 @@ public class GUI extends javax.swing.JFrame {
             turn = "O";
         else
             turn = "X";
+        
+        count++;
+        
+//        if(count == 9)
+//            //reset();
     }
     
     public void win(){
-    
+        
+        //// if X wins 
+        if( (turnArray[0][0].equalsIgnoreCase("X")) && (turnArray[0][1].equalsIgnoreCase("X")) && (turnArray[0][2].equalsIgnoreCase("X")) )
+        {
+            JOptionPane.showMessageDialog(null, "Player X Wins !!!");
+            winx++;
+            reset();
+        }
+        else if((turnArray[1][0].equalsIgnoreCase("X")) && (turnArray[1][1].equalsIgnoreCase("X")) && (turnArray[1][2].equalsIgnoreCase("X")))
+        {
+            JOptionPane.showMessageDialog(null, "Player X Wins !!!");
+            winx++;
+            reset();
+        }
+        else if((turnArray[2][0].equalsIgnoreCase("X")) && (turnArray[2][1].equalsIgnoreCase("X")) && (turnArray[2][2].equalsIgnoreCase("X")))
+        {
+            JOptionPane.showMessageDialog(null, "Player X Wins !!!");
+            winx++;
+            reset();
+        }
+        //up - down
+        else if((turnArray[0][0].equalsIgnoreCase("X")) && (turnArray[1][0].equalsIgnoreCase("X")) && (turnArray[2][0].equalsIgnoreCase("X")))
+        {
+            JOptionPane.showMessageDialog(null, "Player X Wins !!!");
+            winx++;
+            reset();
+        }
+        else if((turnArray[0][1].equalsIgnoreCase("X")) && (turnArray[1][1].equalsIgnoreCase("X")) && (turnArray[2][1].equalsIgnoreCase("X")))
+        {
+            JOptionPane.showMessageDialog(null, "Player X Wins !!!");
+            winx++;
+            reset();
+        }
+        else if((turnArray[0][2].equalsIgnoreCase("X")) && (turnArray[1][2].equalsIgnoreCase("X")) && (turnArray[2][2].equalsIgnoreCase("X")))
+        {
+            JOptionPane.showMessageDialog(null, "Player X Wins !!!");
+            winx++;
+            reset();
+        }
+        // if O wins
+        else if( (turnArray[0][0].equalsIgnoreCase("O")) && (turnArray[0][1].equalsIgnoreCase("O")) && (turnArray[0][2].equalsIgnoreCase("O")) )
+        {
+            JOptionPane.showMessageDialog(null, "Player O Wins !!!");
+            wino++;
+            reset();
+        }
+        else if( (turnArray[1][0].equalsIgnoreCase("O")) && (turnArray[1][1].equalsIgnoreCase("O")) && (turnArray[1][2].equalsIgnoreCase("O")) )
+        {
+            JOptionPane.showMessageDialog(null, "Player O Wins !!!");
+            wino++;
+            reset();
+        }
+        else if( (turnArray[2][0].equalsIgnoreCase("O")) && (turnArray[2][1].equalsIgnoreCase("O")) && (turnArray[2][2].equalsIgnoreCase("O")) )
+        {
+            JOptionPane.showMessageDialog(null, "Player O Wins !!!");
+            wino++;
+            reset();
+        }
+        //up - down
+        else if((turnArray[0][0].equalsIgnoreCase("O")) && (turnArray[1][0].equalsIgnoreCase("O")) && (turnArray[2][0].equalsIgnoreCase("O")))
+        {
+            JOptionPane.showMessageDialog(null, "Player O Wins !!!");
+            wino++;
+            reset();
+        }
+        else if((turnArray[0][1].equalsIgnoreCase("O")) && (turnArray[1][1].equalsIgnoreCase("O")) && (turnArray[2][1].equalsIgnoreCase("O")))
+        {
+            JOptionPane.showMessageDialog(null, "Player O Wins !!!");
+            wino++;
+            reset();
+        }
+        else if((turnArray[0][2].equalsIgnoreCase("O")) && (turnArray[1][2].equalsIgnoreCase("O")) && (turnArray[2][2].equalsIgnoreCase("O")))
+        {
+            JOptionPane.showMessageDialog(null, "Player O Wins !!!");
+            wino++;
+            reset();
+        }
+        
+        //epecial case
+        // o win
+        else if((turnArray[0][0].equalsIgnoreCase("O")) && (turnArray[1][1].equalsIgnoreCase("O")) && (turnArray[2][2].equalsIgnoreCase("O")))
+        {
+            JOptionPane.showMessageDialog(null, "Player O Wins !!!");
+            wino++;
+            reset();
+        }
+        else if((turnArray[0][2].equalsIgnoreCase("O")) && (turnArray[1][1].equalsIgnoreCase("O")) && (turnArray[2][0].equalsIgnoreCase("O")))
+        {
+            JOptionPane.showMessageDialog(null, "Player O Wins !!!");
+            wino++;
+            reset();
+        }
+        // x win 
+        else if((turnArray[0][0].equalsIgnoreCase("X")) && (turnArray[1][1].equalsIgnoreCase("X")) && (turnArray[2][2].equalsIgnoreCase("X")))
+        {
+            JOptionPane.showMessageDialog(null, "Player X Wins !!!");
+            winx++;
+            reset();
+        }
+        else if((turnArray[0][2].equalsIgnoreCase("X")) && (turnArray[1][1].equalsIgnoreCase("X")) && (turnArray[2][0].equalsIgnoreCase("X")))
+        {
+            JOptionPane.showMessageDialog(null, "Player X Wins !!!");
+            winx++;
+            reset();
+        }
+        
+        else if(count == 9)
+        {
+            JOptionPane.showMessageDialog(null, "No Winner");
+            reset();
+        }
+        
+       
+       xLable.setText(""+winx);
+       oLable.setText(""+wino);
+        
     }
     
     public void reset()
     {
+         count = 0;
         //empty the labes 
         jButton1.setText("");
         jButton2.setText("");
@@ -56,7 +181,6 @@ public class GUI extends javax.swing.JFrame {
             for(int j=0; j < turnArray.length; j++)
             {
                 turnArray[i][j] = "";
-                //System.out.print(turnArray[i][j]);
             }
         }
     }
@@ -93,13 +217,16 @@ public class GUI extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jButton10 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jButton11 = new javax.swing.JButton();
-        jButton12 = new javax.swing.JButton();
+        xLable = new javax.swing.JButton();
+        oLable = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
 
         jLabel2.setText("jLabel2");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        setName("Game"); // NOI18N
+        setPreferredSize(new java.awt.Dimension(500, 500));
 
         mainGrid.setLayout(new java.awt.GridLayout(3, 3, 1, 1));
 
@@ -240,9 +367,9 @@ public class GUI extends javax.swing.JFrame {
 
         jLabel1.setText("X Wins:");
 
-        jButton11.setText("0");
+        xLable.setText("0");
 
-        jButton12.setText("0");
+        oLable.setText("0");
 
         jLabel3.setText("O Wins:");
 
@@ -254,13 +381,13 @@ public class GUI extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton11)
+                .addComponent(xLable)
                 .addGap(18, 18, 18)
                 .addComponent(jButton10, javax.swing.GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton12)
+                .addComponent(oLable)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -269,8 +396,8 @@ public class GUI extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jButton11)
-                    .addComponent(jButton12)
+                    .addComponent(xLable)
+                    .addComponent(oLable)
                     .addComponent(jLabel3)
                     .addComponent(jButton10))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -498,8 +625,6 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JPanel grid1;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
-    private javax.swing.JButton jButton11;
-    private javax.swing.JButton jButton12;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
@@ -521,5 +646,7 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JPanel mainGrid;
+    private javax.swing.JButton oLable;
+    private javax.swing.JButton xLable;
     // End of variables declaration//GEN-END:variables
 }
