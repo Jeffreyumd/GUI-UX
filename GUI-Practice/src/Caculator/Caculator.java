@@ -13,9 +13,11 @@ import javax.swing.JOptionPane;
  */
 public class Caculator extends javax.swing.JFrame {
     
+    //variable for functions
     private double num1 = 0;
     private double num2 = 0;
     private double answer;
+    private String oprations = "empty";
     /**
      * Creates new form Caculator
      */
@@ -54,13 +56,13 @@ public class Caculator extends javax.swing.JFrame {
         mulitplay = new javax.swing.JButton();
         jButton0 = new javax.swing.JButton();
         subtract = new javax.swing.JButton();
-        jPanel2 = new javax.swing.JPanel();
-        lb = new javax.swing.JButton();
 
         jLabel1.setText("jLabel1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Simple Caculator");
+        setPreferredSize(new java.awt.Dimension(400, 535));
+        setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(204, 255, 204));
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
@@ -68,6 +70,11 @@ public class Caculator extends javax.swing.JFrame {
         display.setFont(new java.awt.Font("Verdana", 1, 24)); // NOI18N
 
         jButtonCE.setText("CE");
+        jButtonCE.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCEActionPerformed(evt);
+            }
+        });
 
         jButtonC.setText("C");
 
@@ -170,23 +177,11 @@ public class Caculator extends javax.swing.JFrame {
         });
 
         subtract.setText("-");
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lb, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lb, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)
-                .addContainerGap())
-        );
+        subtract.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                subtractActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -234,8 +229,7 @@ public class Caculator extends javax.swing.JFrame {
                                 .addComponent(jButtonCE, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(jButtonC, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, Short.MAX_VALUE))
                             .addComponent(jSeparator1)
                             .addComponent(display))
                         .addContainerGap())))
@@ -247,15 +241,10 @@ public class Caculator extends javax.swing.JFrame {
                 .addComponent(display, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(22, 22, 22)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButtonC, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButtonCE, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(22, 22, 22)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonC, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonCE, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -280,9 +269,8 @@ public class Caculator extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton0, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(subtract, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(37, 37, 37)
-                .addComponent(equals, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
+                .addComponent(equals, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         jButtonCE.getAccessibleContext().setAccessibleDescription("");
@@ -299,9 +287,8 @@ public class Caculator extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -312,7 +299,46 @@ public class Caculator extends javax.swing.JFrame {
         
         if(display.getText() != null)
         {
-            
+            switch(oprations)
+            {
+                case "add":
+                    // collect second number and do opration
+                    num2 = Float.parseFloat(display.getText());
+                    
+                    System.out.println(num2);
+                    
+                    answer = num1 + num2;
+                    display.setText("");
+                    
+                    // display answer
+                    display.setText(display.getText()+answer);
+                break;
+                
+                case "subtract":
+                    // collect second number and do opration
+                    num2 = Float.parseFloat(display.getText());
+                    
+                    System.out.println(num2);
+                    
+                    answer = num1 - num2;
+                    display.setText("");
+                    
+                    // display answer
+                    display.setText(display.getText()+answer);
+                break;
+                
+                case "divide":
+                    
+                break;
+                
+                case "multiplay":
+                    
+                break;
+                
+                default:
+                    display.setText("0");
+                    break;
+            }
         }
         else
         {
@@ -327,7 +353,7 @@ public class Caculator extends javax.swing.JFrame {
         if(display.getText() != null)
         {
             // set display 
-            display.setText(display.getText().toString()+"6");
+            display.setText(display.getText()+"6");
         }
         else // if dsplay box is empty add number as first string 
         {
@@ -342,7 +368,7 @@ public class Caculator extends javax.swing.JFrame {
         if(display.getText() != null)
         {
             // set display 
-            display.setText(display.getText().toString()+"9");
+            display.setText(display.getText()+"9");
         }
         else // if dsplay box is empty add number as first string 
         {
@@ -358,7 +384,7 @@ public class Caculator extends javax.swing.JFrame {
         if(display.getText() != null)
         {
             // set display 
-            display.setText(display.getText().toString()+"8");
+            display.setText(display.getText()+"8");
         }
         else // if dsplay box is empty add number as first string 
         {
@@ -372,7 +398,7 @@ public class Caculator extends javax.swing.JFrame {
         if(display.getText() != null)
         {
             // set display 
-            display.setText(display.getText().toString()+"3");
+            display.setText(display.getText()+"3");
         }
         else // if dsplay box is empty add number as first string 
         {
@@ -389,6 +415,7 @@ public class Caculator extends javax.swing.JFrame {
         
         try
         {
+            oprations = "add";
             num1 = Float.parseFloat(display.getText());
             display.setText("");
         }
@@ -416,7 +443,7 @@ public class Caculator extends javax.swing.JFrame {
         if(display.getText() != null)
         {
             // set display 
-            display.setText(display.getText().toString()+"7");
+            display.setText(display.getText()+"7");
         }
         else // if dsplay box is empty add number as first string 
         {
@@ -430,7 +457,7 @@ public class Caculator extends javax.swing.JFrame {
         if(display.getText() != null)
         {
             // set display 
-            display.setText(display.getText().toString()+"4");
+            display.setText(display.getText()+"4");
         }
         else // if dsplay box is empty add number as first string 
         {
@@ -444,7 +471,7 @@ public class Caculator extends javax.swing.JFrame {
         if(display.getText() != null)
         {
             // set display 
-            display.setText(display.getText().toString()+"5");
+            display.setText(display.getText()+"5");
         }
         else // if dsplay box is empty add number as first string 
         {
@@ -458,7 +485,7 @@ public class Caculator extends javax.swing.JFrame {
         if(display.getText() != null)
         {
             // set display 
-            display.setText(display.getText().toString()+"1");
+            display.setText(display.getText()+"1");
         }
         else // if dsplay box is empty add number as first string 
         {
@@ -472,7 +499,7 @@ public class Caculator extends javax.swing.JFrame {
         if(display.getText() != null)
         {
             // set display 
-            display.setText(display.getText().toString()+"2");
+            display.setText(display.getText()+"2");
         }
         else // if dsplay box is empty add number as first string 
         {
@@ -486,13 +513,39 @@ public class Caculator extends javax.swing.JFrame {
         if(display.getText() != null)
         {
             // set display 
-            display.setText(display.getText().toString()+"0");
+            display.setText(display.getText()+"0");
         }
         else // if dsplay box is empty add number as first string 
         {
             display.setText("0");
         }
     }//GEN-LAST:event_jButton0ActionPerformed
+
+    private void jButtonCEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCEActionPerformed
+        // TODO add your handling code here:
+        display.setText("");
+        num1 = 0;
+        num2 = 0;
+        answer = 0;
+    }//GEN-LAST:event_jButtonCEActionPerformed
+
+    private void subtractActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subtractActionPerformed
+        // TODO add your handling code here:
+        try
+        {
+            oprations = "subtract";
+            num1 = Float.parseFloat(display.getText());
+            display.setText("");
+        }
+        
+        catch(NumberFormatException e)
+        {
+            System.out.println(e);
+            JOptionPane.showMessageDialog(null, "Invalide format");
+            display.setText("");
+        }
+        System.out.println(num1);
+    }//GEN-LAST:event_subtractActionPerformed
 
     /**
      * @param args the command line arguments
@@ -548,10 +601,8 @@ public class Caculator extends javax.swing.JFrame {
     private javax.swing.JButton jButtonCE;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JButton lb;
     private javax.swing.JButton mulitplay;
     private javax.swing.JButton subtract;
     // End of variables declaration//GEN-END:variables
