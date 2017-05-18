@@ -16,6 +16,7 @@ public class Caculator extends javax.swing.JFrame {
     //variable for functions
     private double num1 = 0;
     private double num2 = 0;
+    private double flip;
     private double answer;
     private String oprations = "empty";
     /**
@@ -56,6 +57,8 @@ public class Caculator extends javax.swing.JFrame {
         mulitplay = new javax.swing.JButton();
         jButton0 = new javax.swing.JButton();
         subtract = new javax.swing.JButton();
+        flipButton = new javax.swing.JButton();
+        dotButton = new javax.swing.JButton();
 
         jLabel1.setText("jLabel1");
 
@@ -77,6 +80,11 @@ public class Caculator extends javax.swing.JFrame {
         });
 
         jButtonC.setText("C");
+        jButtonC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCActionPerformed(evt);
+            }
+        });
 
         jButton7.setText("7");
         jButton7.addActionListener(new java.awt.event.ActionListener() {
@@ -177,9 +185,18 @@ public class Caculator extends javax.swing.JFrame {
         });
 
         subtract.setText("-");
-        subtract.addActionListener(new java.awt.event.ActionListener() {
+
+        flipButton.setText("+/-");
+        flipButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                subtractActionPerformed(evt);
+                flipButtonActionPerformed(evt);
+            }
+        });
+
+        dotButton.setText(".");
+        dotButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dotButtonActionPerformed(evt);
             }
         });
 
@@ -195,7 +212,8 @@ public class Caculator extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(flipButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -218,6 +236,8 @@ public class Caculator extends javax.swing.JFrame {
                                 .addComponent(mulitplay, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jButton0, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(dotButton, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(subtract, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
@@ -268,7 +288,9 @@ public class Caculator extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton0, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(subtract, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(subtract, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(flipButton, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(dotButton, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
                 .addComponent(equals, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -296,7 +318,7 @@ public class Caculator extends javax.swing.JFrame {
 
     private void equalsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_equalsActionPerformed
         // TODO add your handling code here:
-        
+
         if(display.getText() != null)
         {
             switch(oprations)
@@ -328,11 +350,45 @@ public class Caculator extends javax.swing.JFrame {
                 break;
                 
                 case "divide":
+                    // collect second number and do opration
+                    num2 = Float.parseFloat(display.getText());
                     
+                    System.out.println(num2);
+                    
+                    try
+                    {
+                        //check 
+                        if (num1 == 0 || num2 == 0 )
+                        {
+                            JOptionPane.showMessageDialog(null, " 'Division by 0' not allowed");
+                            throw new ArithmeticException("Argument 'divisor' is 0");
+                            
+                        }
+                    }
+                    
+                    catch(Exception e)
+                    {
+                        System.out.println(e);
+                    }
+                        
+                    answer = num1 / num2;
+                    display.setText("");
+                    
+                    // display answer
+                    display.setText(display.getText()+answer);
                 break;
                 
                 case "multiplay":
+                    // collect second number and do opration
+                    num2 = Float.parseFloat(display.getText());
                     
+                    System.out.println(num2);
+                    
+                    answer = num1 * num2;
+                    display.setText("");
+                    
+                    // display answer
+                    display.setText(display.getText()+answer);
                 break;
                 
                 default:
@@ -408,6 +464,19 @@ public class Caculator extends javax.swing.JFrame {
 
     private void divideActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_divideActionPerformed
         // TODO add your handling code here:
+         try
+        {
+            oprations = "divide";
+            num1 = Float.parseFloat(display.getText());
+            display.setText("");
+        }
+        
+        catch(NumberFormatException e)
+        {
+            System.out.println(e);
+            JOptionPane.showMessageDialog(null, "Invalide format");
+            display.setText("");
+        }
     }//GEN-LAST:event_divideActionPerformed
 
     private void addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addActionPerformed
@@ -416,7 +485,7 @@ public class Caculator extends javax.swing.JFrame {
         try
         {
             oprations = "add";
-            num1 = Float.parseFloat(display.getText());
+            num1 = Double.parseDouble(display.getText());
             display.setText("");
         }
         
@@ -433,6 +502,21 @@ public class Caculator extends javax.swing.JFrame {
 
     private void mulitplayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mulitplayActionPerformed
         // TODO add your handling code here:
+        try
+        {
+            oprations = "multiplay";
+            num1 = Float.parseFloat(display.getText());
+            display.setText("");
+        }
+        
+        catch(NumberFormatException e)
+        {
+            System.out.println(e);
+            JOptionPane.showMessageDialog(null, "Invalide format");
+            display.setText("");
+        }
+        System.out.println(num1);
+        
         
     }//GEN-LAST:event_mulitplayActionPerformed
 
@@ -529,23 +613,48 @@ public class Caculator extends javax.swing.JFrame {
         answer = 0;
     }//GEN-LAST:event_jButtonCEActionPerformed
 
-    private void subtractActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subtractActionPerformed
+    private void flipButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_flipButtonActionPerformed
         // TODO add your handling code here:
-        try
+        if(display.getText() != null)
         {
-            oprations = "subtract";
-            num1 = Float.parseFloat(display.getText());
+            // get the value of the current number and flip it value + or -
+            flip = Double.parseDouble(display.getText());
+            flip = flip * (-1);
+            
+            //clear and display 
             display.setText("");
+            display.setText(display.getText()+flip);
         }
+    }//GEN-LAST:event_flipButtonActionPerformed
+
+    private void dotButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dotButtonActionPerformed
+        // TODO add your handling code here:
         
-        catch(NumberFormatException e)
+        if(display.getText() != null)
         {
-            System.out.println(e);
-            JOptionPane.showMessageDialog(null, "Invalide format");
+            // set display 
+            display.setText(display.getText()+".");
+        }
+        else // if dsplay box is empty add number as first string 
+        {
+            display.setText("0.");
+        }
+
+    }//GEN-LAST:event_dotButtonActionPerformed
+
+    private void jButtonCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCActionPerformed
+        // TODO add your handling code here:
+        
+        if(display.getText() != null)
+        {
+            // set display 
             display.setText("");
         }
-        System.out.println(num1);
-    }//GEN-LAST:event_subtractActionPerformed
+        else // if dsplay box is empty add number as first string 
+        {
+            display.setText("");
+        }
+    }//GEN-LAST:event_jButtonCActionPerformed
 
     /**
      * @param args the command line arguments
@@ -586,7 +695,9 @@ public class Caculator extends javax.swing.JFrame {
     private javax.swing.JButton add;
     private javax.swing.JTextField display;
     private javax.swing.JButton divide;
+    private javax.swing.JButton dotButton;
     private javax.swing.JButton equals;
+    private javax.swing.JButton flipButton;
     private javax.swing.JButton jButton0;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;

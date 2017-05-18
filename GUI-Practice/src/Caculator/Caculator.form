@@ -76,6 +76,7 @@
                               <Component id="jButton7" min="-2" pref="80" max="-2" attributes="0"/>
                               <Component id="jButton4" min="-2" pref="80" max="-2" attributes="0"/>
                               <Component id="jButton1" min="-2" pref="80" max="-2" attributes="0"/>
+                              <Component id="flipButton" alignment="1" min="-2" pref="80" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
@@ -102,6 +103,8 @@
                               </Group>
                               <Group type="102" attributes="0">
                                   <Component id="jButton0" min="-2" pref="80" max="-2" attributes="0"/>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <Component id="dotButton" min="-2" pref="80" max="-2" attributes="0"/>
                                   <EmptySpace max="32767" attributes="0"/>
                                   <Component id="subtract" min="-2" pref="80" max="-2" attributes="0"/>
                               </Group>
@@ -167,6 +170,8 @@
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jButton0" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
                       <Component id="subtract" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
+                      <Component id="flipButton" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
+                      <Component id="dotButton" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="48" max="32767" attributes="0"/>
                   <Component id="equals" min="-2" pref="37" max="-2" attributes="0"/>
@@ -199,6 +204,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="C"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonCActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="jButton7">
           <Properties>
@@ -318,8 +326,21 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="-"/>
           </Properties>
+        </Component>
+        <Component class="javax.swing.JButton" name="flipButton">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="+/-"/>
+          </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="subtractActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="flipButtonActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="dotButton">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="."/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="dotButtonActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>
